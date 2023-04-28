@@ -3,7 +3,7 @@
 export default function Home() {
   return (
     <>
-      <h1>CouiqueFlix</h1>
+      <h1 className="text-2xl text-teal-500">CouiqueFlix</h1>
     </>
   )
 }
