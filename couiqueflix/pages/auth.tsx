@@ -1,3 +1,4 @@
+import Input from "@/components/input"
 import Image from "next/image"
 
 
@@ -23,7 +24,7 @@ const Auth = () => {
                                 Sign In
                             </h2>
                             <div className="flex flex-col gap-4">
-                                
+                                <Input />
                             </div>
                         </div>
 
