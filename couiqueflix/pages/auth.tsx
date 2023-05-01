@@ -5,10 +5,17 @@ import { useState } from "react"
 import { useCallback } from "react"
 import axios from "axios"
 import { signIn } from "next-auth/react"
+import { useRouter } from "next/router"
+import { FcGoogle  } from "react-icons/fc"
+import { FaGithub } from "react-icons/fa"
+
 
 
 // Auth page - Sign In Input setup
 const Auth = () => {
+// HOOK TO EXPORT THE ROUTER AFTER WE SUCCESSFULLY LOGIN TO THE HOME PAGE
+    const router = useRouter()
+
     const [email, setEmail] = useState('')
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
@@ -19,6 +26,27 @@ const Auth = () => {
     const toggleVariant = useCallback(() => {
         setVariant((currentVariant) => currentVariant === 'login' ? 'register' : 'login')
     },[])
+    // Login function - connect to the API
+        const login = useCallback(async () => {
+            try {
+                // we use the signIn function from next-auth
+                await signIn('credentials', {
+                    email,
+                    password,
+                    // we set the redirect to false as we want to stay on the same page
+                    redirect: false,
+                    // we set the callbackUrl to the homepage
+                    callbackUrl: '/'
+                })
+                // we push the user to the homepage
+                router.push('/')
+            }catch(error) {
+                console.log(error)
+            }
+            // we add the dependencies to the array as we need to be in sync with the state
+            // we add the router to the array as we need to be in sync with the state
+        }, [email, password, router])
+
     // REGISTER FUNCTION - CONNECT TO THE API
     const register = useCallback(async () => {
         try {
@@ -28,31 +56,16 @@ const Auth = () => {
                 password
             })
 
+            // we call the login function after we register
+            login()
         }catch(error) {
             console.log(error)
 
         }
         // we add the dependencies to the array as we need to be in sync with the state
-    },[email, name, password])
+    },[email, name, password, login])
 
 
-// Login function - connect to the API
-    const login = useCallback(async () => {
-        try {
-            // we use the signIn function from next-auth
-            await signIn('credentials', {
-                email,
-                password,
-                // we set the redirect to false as we want to stay on the same page
-                redirect: false,
-                // we set the callbackUrl to the homepage
-                callbackUrl: '/'
-            })
-        }catch(error) {
-            console.log(error)
-        }
-        // we add the dependencies to the array as we need to be in sync with the state
-    }, [email, password])
 
 
     return (
@@ -110,6 +123,41 @@ const Auth = () => {
                                 {/* TOGGLE BUTTON LOGIN OR REGISTER LOGIC */}
                                 {variant === 'login' ? 'Login' : 'Sign Up'}
                             </button>
+
+                            {/* ADDING GOOGLE, GITHUB,FACEBOOK SIGNIN OPTIONS */}
+                            <div className="flex flex-row items-center gap-4 mt-8 justify-center">
+                                {/* GOOGLE */}
+                                <div className=" 
+                                w-10
+                                h-10
+                                bg-white
+                                rounded-full
+                                flex
+                                items-center
+                                justify-center
+                                cursor-pointer
+                                hover:opacity-80
+                                transition
+                                ">
+                                    <FcGoogle size={30} />
+                                </div>
+                                {/* GITHUB  */}
+                                <div className=" 
+                                w-10
+                                h-10
+                                bg-white
+                                rounded-full
+                                flex
+                                items-center
+                                justify-center
+                                cursor-pointer
+                                hover:opacity-80
+                                transition
+                                ">
+                                    <FaGithub size={30} />
+                                </div>
+                            </div>
+
                             <p className="text-neutral-500 mt-12">
                                 
                                 {/* TOGGLE LOGIN OR REGISTER  LOGIC */}

@@ -25,6 +25,7 @@ MONGODB
   
 - yarn prisma db push
 
+=================================================
 AUTHENTICATION
 - yarn add next-auth 
 - yarn add bcrypt
@@ -33,3 +34,26 @@ AUTHENTICATION
 User CONNECT TO THE DB
 - yarn add axios
 - register.ts
+
+CREATE NEXTAUTH FILE, REGISTER FILE -> ADD REGISTER AND LOGIN FUNCTION, REDIRECT TO HOME IF SUCCESSFULL
+
+SIGNIN WITH GOOGLE, FACEBOOK...ETC
+- yarn add react-icons
+  
+  Then import IN AUTH.TSX:
+  import { FcGoogle  } from "react-icons/fc"
+  import { FaGithub } from "react-icons/fa"
+
+  .ENV:
+GITHUB_ID = 
+GITHUB_SECRET =
+
+GOOGLE_CLIENT_ID =
+GOOGLE_CLIENT_SECRET =
+
+NEXTAUTH: 
+- import GithubProvider and GoogleProvider
+- add them with their clientID and clientSecret to nextauth providers []
+
+- yarn add @next-auth/prisma-adapter
+- import { PrismaAdapter } from "@next-auth/prisma-adapter";
