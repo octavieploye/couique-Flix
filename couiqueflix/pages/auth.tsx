@@ -4,6 +4,7 @@ import Image from "next/image"
 import { useState } from "react"
 import { useCallback } from "react"
 import axios from "axios"
+import { signIn } from "next-auth/react"
 
 
 // Auth page - Sign In Input setup
@@ -31,8 +32,27 @@ const Auth = () => {
             console.log(error)
 
         }
-
+        // we add the dependencies to the array as we need to be in sync with the state
     },[email, name, password])
+
+
+// Login function - connect to the API
+    const login = useCallback(async () => {
+        try {
+            // we use the signIn function from next-auth
+            await signIn('credentials', {
+                email,
+                password,
+                // we set the redirect to false as we want to stay on the same page
+                redirect: false,
+                // we set the callbackUrl to the homepage
+                callbackUrl: '/'
+            })
+        }catch(error) {
+            console.log(error)
+        }
+        // we add the dependencies to the array as we need to be in sync with the state
+    }, [email, password])
 
 
     return (
@@ -83,7 +103,10 @@ const Auth = () => {
                                 />
                             </div>
                             {/* LOGIN / REGISTER BUTTON */}
-                            <button className="bg-red-600 py-3  text-white rounded-md w-full mt-10 hover-bg-red-700 transition ">
+                            <button 
+                            // WE USE THE VARIANT STATE TO TOGGLE THE LOGIN OR REGISTER LOGIC
+                            onClick={variant === 'login' ? login : register}
+                            className="bg-red-600 py-3  text-white rounded-md w-full mt-10 hover-bg-red-700 transition ">
                                 {/* TOGGLE BUTTON LOGIN OR REGISTER LOGIC */}
                                 {variant === 'login' ? 'Login' : 'Sign Up'}
                             </button>

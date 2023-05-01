@@ -30,5 +30,6 @@ AUTHENTICATION
 - yarn add bcrypt
 - yarn add -D @types/bcrypt
 
-CONNECT TO THE DB
+User CONNECT TO THE DB
 - yarn add axios
+- register.ts
