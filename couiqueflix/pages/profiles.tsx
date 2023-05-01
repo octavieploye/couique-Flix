@@ -1,6 +1,8 @@
 import { getSession } from 'next-auth/react'
 import { NextPageContext } from 'next'
 import Image from 'next/image'
+import useCurrentUser from '@/hooks/useCurrentUser'
+import { useRouter } from 'next/router'
 
 export async function getServerSideProps(context: NextPageContext) {
     // Get the user's session based on the request
@@ -22,12 +24,14 @@ export async function getServerSideProps(context: NextPageContext) {
 }
 
 const Profiles = () => {
+    const router = useRouter()
+    const { data: user } = useCurrentUser()
     return (
         <div className='flex items-center h-full justify-center'>
             <div className='flex flex-col'>
                 <h1 className='text-3xl md:text-6xl text-white text-center'>Who is watching?</h1>
                 <div className='flex  items-center justify-center gap-8 mt-10'>
-                    <div onClick={() => {}}>
+                    <div onClick={() => router.push('/')}>
 
                 {/* WE ADD THE CONTAINER THE PROFILES PICS  */}
                         <div className='group flex-row w-44 mx-auto'>
@@ -49,6 +53,16 @@ const Profiles = () => {
                                 width={800}
                                 height={800}
                                 alt="profile-logo-red"/>
+                            </div>
+
+                            <div className='
+                            mt-4
+                            text-gray-400
+                            text-2xl
+                            text-center
+                            group-hover:text-white
+                            '>
+                               {user?.name}
                             </div>
 
                         </div>
