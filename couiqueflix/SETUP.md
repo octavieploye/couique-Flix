@@ -29,3 +29,6 @@ AUTHENTICATION
 - yarn add next-auth 
 - yarn add bcrypt
 - yarn add -D @types/bcrypt
+
+CONNECT TO THE DB
+- yarn add axios
