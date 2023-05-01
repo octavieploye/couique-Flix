@@ -127,7 +127,9 @@ const Auth = () => {
                             {/* ADDING GOOGLE, GITHUB,FACEBOOK SIGNIN OPTIONS */}
                             <div className="flex flex-row items-center gap-4 mt-8 justify-center">
                                 {/* GOOGLE */}
-                                <div className=" 
+                                <div 
+                                onClick={() => signIn('google',{callbackUrl: '/'})}
+                                className=" 
                                 w-10
                                 h-10
                                 bg-white
