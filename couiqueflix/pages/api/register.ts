@@ -4,23 +4,28 @@ import prismadb from '@/database/prismadb';
 import { Console } from 'console';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    // We limit this handle to Only allow POST request to this API route
     if(req.method !== 'POST') {
         return res.status(405).end()
     } try {
+        // extract the value from the body
         const {email, name, password } =req.body
 
+        // check if the email already exist
         const existingUser = await prismadb.user.findUnique({
             where: {
-                email
+                email,
             }
         })
-
+        // if user already exist, return error
         if(existingUser) {
             return res.status(422).json({ error: 'email already exist'})
         }
 
+        // The code uses bcrypt to hash a password with a salt and cost factor of 12, returning a promise with the hashed password.
         const hashedPassword = await bcrypt.hash(password, 12)
 
+        // We want to save the above hashed password to the database in a new user model
         const user = await prismadb.user.create({
             data: {
                 email,

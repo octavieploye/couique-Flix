@@ -32,7 +32,7 @@ const Auth = () => {
 
         }
 
-    },[])
+    },[email, name, password])
 
 
     return (
