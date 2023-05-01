@@ -61,13 +61,17 @@ export default NextAuth({
     pages: {
         signIn: "/auth",
     },
+    // We use the debug option to display more information in the console
     debug: process.env.NODE_ENV === "development",
     // We use the PrismaAdapter to connect NextAuth to our Providers GOOGLE & GITHUB
     adapter: PrismaAdapter(prismadb),
+    // We use the session object to configure the session
     session: {
         strategy: "jwt",
     },
+    // We use the jwt object to configure the JWT
     jwt: {
+        // We use the secret option to configure the JWT secret
         secret: process.env.NEXTAUTH_JWT_SECRET,
     },
     secret: process.env.NEXTAUTH_SECRET,
