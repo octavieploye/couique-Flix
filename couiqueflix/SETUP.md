@@ -57,3 +57,7 @@ NEXTAUTH:
 
 - yarn add @next-auth/prisma-adapter
 - import { PrismaAdapter } from "@next-auth/prisma-adapter";
+
+HOOKS
+
+- yarn add swr

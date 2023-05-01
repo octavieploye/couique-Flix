@@ -1,20 +1,21 @@
 import bcrypt from 'bcrypt';
 import { NextApiRequest, NextApiResponse } from 'next';
 import prismadb from '@/database/prismadb';
-import { Console } from 'console';
+
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     // We limit this handle to Only allow POST request to this API route
+    try {
     if(req.method !== 'POST') {
         return res.status(405).end()
-    } try {
+    } 
         // extract the value from the body
         const {email, name, password } =req.body
 
         // check if the email already exist
         const existingUser = await prismadb.user.findUnique({
             where: {
-                email,
+                email
             }
         })
         // if user already exist, return error
@@ -40,6 +41,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     } catch (error) {
         console.log(error);
-        return res.status(400).end()
+        return res.status(400).json({error: 'Something went wrong'})
     }
 }
