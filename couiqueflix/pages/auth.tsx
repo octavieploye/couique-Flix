@@ -5,7 +5,7 @@ import { useState } from "react"
 import { useCallback } from "react"
 import axios from "axios"
 import { signIn } from "next-auth/react"
-import { useRouter } from "next/router"
+
 import { FcGoogle  } from "react-icons/fc"
 import { FaGithub } from "react-icons/fa"
 
@@ -14,7 +14,7 @@ import { FaGithub } from "react-icons/fa"
 // Auth page - Sign In Input setup
 const Auth = () => {
 // HOOK TO EXPORT THE ROUTER AFTER WE SUCCESSFULLY LOGIN TO THE HOME PAGE
-    const router = useRouter()
+    
 
     const [email, setEmail] = useState('')
     const [name, setName] = useState('')
@@ -33,19 +33,16 @@ const Auth = () => {
                 await signIn('credentials', {
                     email,
                     password,
-                    // we set the redirect to false as we want to stay on the same page
-                    redirect: false,
                     // we set the callbackUrl to the homepage
-                    callbackUrl: '/'
+                    callbackUrl: '/profiles'
                 })
-                // we push the user to the homepage
-                router.push('/')
+                
             }catch(error) {
                 console.log(error)
             }
             // we add the dependencies to the array as we need to be in sync with the state
             // we add the router to the array as we need to be in sync with the state
-        }, [email, password, router])
+        }, [email, password])
 
     // REGISTER FUNCTION - CONNECT TO THE API
     const register = useCallback(async () => {
@@ -128,7 +125,7 @@ const Auth = () => {
                             <div className="flex flex-row items-center gap-4 mt-8 justify-center">
                                 {/* GOOGLE */}
                                 <div 
-                                onClick={() => signIn('google',{callbackUrl: '/'})}
+                                onClick={() => signIn('google',{callbackUrl: '/profiles'})}
                                 className=" 
                                 w-10
                                 h-10
@@ -145,7 +142,7 @@ const Auth = () => {
                                 </div>
                                 {/* GITHUB  */}
                                 <div 
-                                onClick={() => signIn('github',{callbackUrl: '/'})}
+                                onClick={() => signIn('github',{callbackUrl: '/profiles'})}
                                 
                                 className=" 
                                 w-10
