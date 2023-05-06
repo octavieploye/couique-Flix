@@ -61,3 +61,13 @@ NEXTAUTH:
 HOOKS
 
 - yarn add swr
+
+NAVBAR - CREATED FROM COMPONENTS AND ADDED TO INDEX.TS
+- Navbar.tsx
+- NavbarItem.tsx
+- ListDropdown.tsx
+- AccountMenu.tsx
+
+CREATING AND ADDING THE DATABASE IN MONGODB
+- ROUTING:  IN PAGES -> API ->random.ts
+
