@@ -1,7 +1,22 @@
 import Image from 'next/image'
 import NavbarItem from './NavbarItem'
+// IMPORT chevron icon
+import {BsChevronDown}    from 'react-icons/bs'
+import ListDropdown from './ListDropdown'
+import { useCallback, useState } from 'react'
+
+
+
+
 
 const Navbar = () => {
+    // CREATE A STATE FOR THE DROPDOWN MENU
+    const [showListDropdown, setShowListDropdown] = useState(false)
+    // CREATE A FUNCTION TO TOGGLE THE DROPDOWN MENU
+    const toggleListDropdown = useCallback(() => {
+        setShowListDropdown((current) => !current)
+    }, [])
+
     return (
         <nav className="w-full fixed  z-40">
             <div className="
@@ -23,15 +38,18 @@ const Navbar = () => {
                 width={100}
                 height={300}
                 />
+
+                {/* NAVBAR LIST - " HIDDEN " ON SMALL SCREENS */}
                 <div 
                 className='
-                flex
+                hidden 
                 flex-row
                 px-4
                 items-center
                 space-x-2
                 gap-7
                 lg:flex
+
                 '>
                   
                     <NavbarItem label='Home' />
@@ -40,6 +58,21 @@ const Navbar = () => {
                     <NavbarItem label='New & Popular' />
                     <NavbarItem label='My List' />
                     <NavbarItem label='Browse by Languages' />
+                </div>
+
+                {/* NAVBAR BROWSE VERTICALLY FOR SMALL SCREEN */}
+                <div 
+                onClick={toggleListDropdown}
+                className='lg:hidden flex flex-row items-center gap-2 ml-8 cursor-pointer relative'>
+                    <p className='text-white text-sm'>
+                        Browse
+                    </p>
+                    <BsChevronDown className = "text-white transition "/>
+
+                {/* DROPDOWN MENU */}
+
+               <ListDropdown visible={showListDropdown} />
+
                 </div>
             </div>
         </nav>
