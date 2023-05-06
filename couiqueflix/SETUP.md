@@ -26,6 +26,12 @@ MONGODB
 - yarn prisma db push
 
 =================================================
+Error from <Images fetched from URL> - SEE next.config.js
+ADD: EXAMPLE: images: {
+   domains:['upload.wikimedia.org', 'uhdtv.io' , 'mango.blender.org', 'download.blender.org'],
+  },
+
+=================================================
 AUTHENTICATION
 - yarn add next-auth 
 - yarn add bcrypt

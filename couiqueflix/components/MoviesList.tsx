@@ -3,6 +3,7 @@
 import React from "react";
 // isEmpty is a function from lodash that checks if an object is empty
 import { isEmpty } from "lodash";
+import MovieCard from "./MovieCard";
 
 // We define the props of the component
 interface MoviesListProps {
@@ -24,7 +25,7 @@ const MoviesList: React.FC<MoviesListProps> = ({data, title}) => {
                 </p>
                 <div className="grid grid-cols-4 gap-2 ">
                     {data.map((movie: any) => (
-                        <div key={movie.id} className="flex flex-col md:flex-row gap-4">Movie</div>
+                        <MovieCard key={movie.id} data={movie} />
                     ))}
                 </div>
             </div>
