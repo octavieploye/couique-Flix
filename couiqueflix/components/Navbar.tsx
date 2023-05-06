@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 // IMPORT chevron icon
 import {BsChevronDown, BsSearch, BsBell}    from 'react-icons/bs'
 
@@ -7,18 +7,40 @@ import NavbarItem from './NavbarItem'
 import ListDropdown from './ListDropdown'
 import AccountMenu from './AccountMenu'
 
-
+// GETS BACKGROUND DARKER WHEN SCROLLING
+const TOP_OFFSET = 66
 
 const Navbar = () => {
     // CREATE A STATE FOR THE DROPDOWN MENU
     const [showListDropdown, setShowListDropdown] = useState(false)
+    // CREATE A STATE FOR THE ACCOUNT MENU
+    const [showAccountMenu, setShowAccountMenu] = useState(false)
+    // CREATE A STATE FOR THE BACKGROUND GETTING DARKER WHEN SCROLLING
+    const [showBackground, setShowBackground] = useState(false)
+
+    // CREATE A USEEFFECT TO HANDLE THE SCROLL FOR THE BACKGROUND TO GET DARKER
+    useEffect(() => {
+        // CREATE A FUNCTION TO HANDLE THE SCROLL
+        const handleScroll = () => {
+            if (window.scrollY>=  TOP_OFFSET)  {
+                setShowBackground(true)
+            } else {
+                setShowBackground(false)
+            }
+           
+        }
+        // ADD EVENT LISTENER TO THE scroll EVENT
+        window.addEventListener('scroll', handleScroll)
+        // REMOVE EVENT LISTENER ON THE UNMOUNT FUNCTION IN USEEFFECT
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+        }
+    },[])
+
     // CREATE A FUNCTION TO TOGGLE THE DROPDOWN MENU
     const toggleListDropdown = useCallback(() => {
         setShowListDropdown((current) => !current)
     }, [])
-
-    // CREATE A STATE FOR THE ACCOUNT MENU
-    const [showAccountMenu, setShowAccountMenu] = useState(false)
     // CREATE A FUNCTION TO TOGGLE THE ACCOUNT MENU
     const toggleAccountMenu = useCallback(() => {
         setShowAccountMenu((current) => !current)
@@ -27,8 +49,8 @@ const Navbar = () => {
 
     return (
         <nav className="w-full fixed  z-40">
-            <div className="
-            px-4
+            <div className=
+       {`     px-4
             md:px-16
             py-6
             flex
@@ -36,9 +58,11 @@ const Navbar = () => {
             items-center
             transition
             duration-500
-            bg-zinc-900
-            bg-opacity-90 
-            ">
+           
+            ${showBackground ? 'bg-zinc-900 bg-opacity-90' : ''}
+            
+            `}
+            >
                 <Image  
                 // className='h-4 lg:h-7'
                 src="/images/logo.png"  
