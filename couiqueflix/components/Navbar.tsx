@@ -75,8 +75,8 @@ const Navbar = () => {
                     <p className='text-white text-sm'>
                         Browse
                     </p>
-                    {/* CHEVRON ARROW - TOGGLE DROPDOWN MENU */}
-                    <BsChevronDown className = "text-white transition "/>
+                    {/* CHEVRON ARROW -> ROTATE WHEN  CLOSING & OPENING - TOGGLE DROPDOWN MENU */}
+                    <BsChevronDown className = {`text-white transition ${showListDropdown ? 'rotate-180' : 'rotate-0'}`} />
 
                 {/* DROPDOWN MENU */}
                <ListDropdown visible={showListDropdown} />
@@ -90,14 +90,15 @@ const Navbar = () => {
                     <div className='text-gray-200 hover:text-gray-300 cursor-pointer transition'>
                     <BsBell />
                     </div>
-                {/* PROFILE */}
+                {/* PROFILE MENU */}
                     <div
                     onClick={toggleAccountMenu}
                      className='flex flex-row items-center gap-2 cursor-pointer relative'>
                         <div className='w-6 h-6 lg:w-10 lg:h-10 rounded-sm overflow-hidden'>
                             <Image src="/images/profile-red.png" alt="profile-red" width={200} height={200} />
                         </div>
-                        <BsChevronDown className = "text-white transition "/>
+                        {/* ROTATE CHEVRON WHEN CLOSING & OPENING ACCOUNT MENU */}
+                        <BsChevronDown className = {`text-white transition ${showAccountMenu ? 'rotate-180' : 'rotate-0'}`} />
                         <AccountMenu visible={showAccountMenu} />
                     </div>
 
