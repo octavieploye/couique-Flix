@@ -3,6 +3,7 @@ import useCurrentUser from "@/hooks/useCurrentUser"
 // We import the NextPageContext type to define the context of the getServerSideProps function
 import { NextPageContext } from "next"
 import { signOut, getSession } from "next-auth/react"
+import Billboard from "@/components/Billboard"
 
 
 // This is a protected page
@@ -32,6 +33,7 @@ export default function Home() {
   return (
     <>
       < Navbar />
+      <Billboard />
 
     </>
   )
