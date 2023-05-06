@@ -69,5 +69,18 @@ NAVBAR - CREATED FROM COMPONENTS AND ADDED TO INDEX.TS
 - AccountMenu.tsx
 
 CREATING AND ADDING THE DATABASE IN MONGODB
-- ROUTING:  IN PAGES -> API ->random.ts
+
+ROUTING:
+
+  1- RANDOM MOVIE
+- IN PAGES -> API ->random.ts
+- IN HOOKS -> useBillboard
+- IN COMPONENTS - > Billboard
+
+  2- MOVIES LIST
+- IN PAGES -> API -> movieList -> index.ts
+- IN HOOKS -> useMovieList.ts
+- IN COMPONENTS - > MoviesList.tsx
+
+- yarn add lodash & yarn add -D @types/lodash
 
