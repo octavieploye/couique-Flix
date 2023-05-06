@@ -1,11 +1,11 @@
 import Image from 'next/image'
-import NavbarItem from './NavbarItem'
+import { useCallback, useState } from 'react'
 // IMPORT chevron icon
 import {BsChevronDown, BsSearch, BsBell}    from 'react-icons/bs'
+
+import NavbarItem from './NavbarItem'
 import ListDropdown from './ListDropdown'
-import { useCallback, useState } from 'react'
-
-
+import AccountMenu from './AccountMenu'
 
 
 
@@ -16,6 +16,14 @@ const Navbar = () => {
     const toggleListDropdown = useCallback(() => {
         setShowListDropdown((current) => !current)
     }, [])
+
+    // CREATE A STATE FOR THE ACCOUNT MENU
+    const [showAccountMenu, setShowAccountMenu] = useState(false)
+    // CREATE A FUNCTION TO TOGGLE THE ACCOUNT MENU
+    const toggleAccountMenu = useCallback(() => {
+        setShowAccountMenu((current) => !current)
+
+    },[])
 
     return (
         <nav className="w-full fixed  z-40">
@@ -83,12 +91,14 @@ const Navbar = () => {
                     <BsBell />
                     </div>
                 {/* PROFILE */}
-                    <div className='flex flex-row items-center gap-2 cursor-pointer relative'>
+                    <div
+                    onClick={toggleAccountMenu}
+                     className='flex flex-row items-center gap-2 cursor-pointer relative'>
                         <div className='w-6 h-6 lg:w-10 lg:h-10 rounded-sm overflow-hidden'>
                             <Image src="/images/profile-red.png" alt="profile-red" width={200} height={200} />
                         </div>
                         <BsChevronDown className = "text-white transition "/>
-                        <AccountMenu />
+                        <AccountMenu visible={showAccountMenu} />
                     </div>
 
                 </div>
