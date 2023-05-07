@@ -1,3 +1,4 @@
+// * This is the home page of the app
 import { signOut, getSession } from "next-auth/react"
 // We import the NextPageContext type to define the context of the getServerSideProps function
 import { NextPageContext } from "next"
@@ -8,6 +9,8 @@ import MoviesList from "@/components/MoviesList"
 import useCurrentUser from "@/hooks/useCurrentUser"
 import useMovieList from "@/hooks/useMovieList"
 import useFavorites from "@/hooks/useFavorites"
+import InfoModal from "@/components/InfoModal"
+import useInfoModalStore from "@/hooks/useInfoModalStore"
 
 
 // This is a protected page
@@ -38,8 +41,12 @@ const {data: movies =[]} = useMovieList()
   // Get the current user
   const { data: user } = useCurrentUser()
   const {data: favorites =[]} = useFavorites()
+  // Get the state of the modal
+  const { isOpen, closeModal } = useInfoModalStore()
   return (
-    <>
+    <> 
+    {/* InfoModal to store the info from the movie */}
+      <InfoModal visible={isOpen} onClose={closeModal} />
       < Navbar />
       <Billboard />
     <div className="pb-40">

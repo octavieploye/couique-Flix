@@ -1,13 +1,23 @@
 // * Component that shows the random video & the movieList from the API
 import useBillboard from "@/hooks/useBillboard";
-import React from "react";
+import React, { useCallback } from "react";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import PlayButton from "./PlayButton";
+import useInfoModalStore from "@/hooks/useInfoModalStore";
 
 
 const Billboard = () => {
     // fetch the random video
     const { data } = useBillboard()
+
+    // ***fetch the modal INFO FROM INFOMODAL.TSX COMPONENT
+    const { openModal } = useInfoModalStore()
+
+    // OPEN THE MODAL INFO FROM INFOMODAL.TSX COMPONENT WITH THE ID OF THE MOVIE
+    const handleOpenModal = useCallback(() => {
+        openModal(data?.id)
+    }, [openModal, data?.id])
+
     return (
         // Aspect ratio 21:9 of the movies loading
         <div className="relative h-[56.25vw] ">
@@ -36,7 +46,11 @@ const Billboard = () => {
                     {/* PLAY BUTTON FROM PLAYBUTTON COMPONENT */}
                     <PlayButton movieId={data?.id} />
 
-                    <button className="bg-white text-white bg-opacity-30 flex flex-row py-1 md:py-2 px-2 md:px-4 w-auto items-center text-xs lg:text-lg rounded-md  font-semibold hover:bg-opacity-20">
+                    <button 
+                    
+                    // OPEN THE MODAL INFO FROM INFOMODAL.TSX COMPONENT WITH THE ID OF THE MOVIE
+                    onClick={handleOpenModal}
+                    className="bg-white text-white bg-opacity-30 flex flex-row py-1 md:py-2 px-2 md:px-4 w-auto items-center text-xs lg:text-lg rounded-md  font-semibold hover:bg-opacity-20">
                     <AiOutlineInfoCircle className="mr-1"/>
                         More Info   
                     </button>
