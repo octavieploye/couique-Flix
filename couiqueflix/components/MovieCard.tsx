@@ -15,6 +15,7 @@ const MovieCard: React.FC<MovieCardProps> = ({data}) => {
     // Define the ROUTER
     const router = useRouter();
 
+    // * USE MODAL STORE to OPEN MODAL movie info
     const { openModal } = useInfoModalStore()
     return (
         // CARD CONTAINER
@@ -67,6 +68,7 @@ const MovieCard: React.FC<MovieCardProps> = ({data}) => {
                         <FavoritesButton movieId={data?.id} />
                         {/* CLOSE - OPEN MOVIE INFO BUTTON  */}
                         <div 
+                        //  ONCLICK OPEN MODAL MOVIE INFO CHEVRON DOWN FROM MOVIE CARD
                         onClick={() => openModal(data?.id)}
                         className="
                         cursor-pointer 
