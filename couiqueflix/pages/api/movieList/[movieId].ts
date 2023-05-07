@@ -44,6 +44,6 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
     return res.status(200).json(updatedUser);
   }
 
-  return res.status(405).end();
+//   return res.status(405).end();
 
 }
