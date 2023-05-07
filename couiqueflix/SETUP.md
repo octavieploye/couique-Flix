@@ -94,3 +94,8 @@ ROUTING:
 
 - yarn add lodash & yarn add -D @types/lodash
 
+PLAYBUTTON
+
+
+INFO MODALS
+- yarn add zustand
