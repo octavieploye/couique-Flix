@@ -29,7 +29,8 @@ const FavoritesButton: React.FC<FavoritesButtonProps> = ({movieId}) => {
         let response;
         // IF THE MOVIE IS ALREADY IN THE FAVORITES LIST, DELETE IT
         if (isFavorite) {
-            response = await axios.delete('/api/favorite', {data: {movieId} })
+            response = await axios.delete(`/api/favorite/${movieId}`)
+            console.log(response);
         }else {
             // IF THE MOVIE IS NOT IN THE FAVORITES LIST, ADD IT
             response = await axios.post('/api/favorite', {movieId});
