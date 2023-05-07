@@ -1,9 +1,11 @@
 // * THIS IS THE MOVIE CARD COMPONENT
 import React from "react";
 import Image from "next/image";
-import { BsFillPlayFill } from "react-icons/bs";
+import { BsFillPlayFill  } from "react-icons/bs";
+import { BiChevronDown } from "react-icons/bi";
 import FavoritesButton from "./FavoritesButton";
 import { useRouter } from "next/router";
+import useInfoModalStore from "@/hooks/useInfoModalStore";
 
 interface MovieCardProps {
     data: Record<string, any>;
@@ -12,6 +14,8 @@ interface MovieCardProps {
 const MovieCard: React.FC<MovieCardProps> = ({data}) => {
     // Define the ROUTER
     const router = useRouter();
+
+    const { openModal } = useInfoModalStore()
     return (
         // CARD CONTAINER
         <div className="group bg-zinc-900 col-span relative h-[12vw]">
@@ -61,6 +65,29 @@ const MovieCard: React.FC<MovieCardProps> = ({data}) => {
                         </div>
                         {/* FAVORITES MOVIES BUTTON COMPONENT ADDED */}
                         <FavoritesButton movieId={data?.id} />
+                        {/* CLOSE - OPEN MOVIE INFO BUTTON  */}
+                        <div 
+                        onClick={() => openModal(data?.id)}
+                        className="
+                        cursor-pointer 
+                        ml-auto 
+                        group/item 
+                        w-6 h-6 
+                        lg:w-10 lg:h-10
+                        border-white border-2
+                        rounded-full
+                        flex
+                        justify-center
+                        items-center
+                        transition
+                        hover:border-neutral-300
+                        ">
+                            <BiChevronDown 
+                            className="
+                            text-white group-hover/item:text-neutral-300"
+                            size={30} />
+                            
+                        </div>
                     </div>
                     {/* MOVIE INFO - YEAR OF RELEASE */}
                     <p className="text-teal-400 font-semibold mt-4">
