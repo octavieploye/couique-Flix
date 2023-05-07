@@ -1,3 +1,4 @@
+// ** useCurrentUser hook FROM CURRENT API**
 // SWR allows to avoid using a State management library like Redux or MobX
 import useSWR from 'swr'
 

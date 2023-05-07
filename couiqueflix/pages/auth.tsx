@@ -1,20 +1,37 @@
 
 import Input from "../components/Input"
 import Image from "next/image"
-import { useState } from "react"
-import { useCallback } from "react"
+import { useState, useCallback } from "react"
+
 import axios from "axios"
-import { signIn } from "next-auth/react"
+import { getSession, signIn } from "next-auth/react"
+import { useRouter } from "next/router"
+import { NextPageContext } from "next"
 
 import { FcGoogle  } from "react-icons/fc"
 import { FaGithub } from "react-icons/fa"
 
-
+export async function getServerSideProps(context: NextPageContext) {
+    const session = await getSession(context);
+  
+    if (session) {
+      return {
+        redirect: {
+          destination: '/',
+          permanent: false,
+        }
+      }
+    }
+  
+    return {
+      props: {}
+    }
+  }
 
 // Auth page - Sign In Input setup
 const Auth = () => {
 // HOOK TO EXPORT THE ROUTER AFTER WE SUCCESSFULLY LOGIN TO THE HOME PAGE
-    
+    const router = useRouter()
 
     const [email, setEmail] = useState('')
     const [name, setName] = useState('')
@@ -33,16 +50,17 @@ const Auth = () => {
                 await signIn('credentials', {
                     email,
                     password,
+                    redirect: false,
                     // we set the callbackUrl to the homepage
-                    callbackUrl: '/profiles'
+                    callbackUrl: '/'
                 })
-                
+                router.push('/profiles')
             }catch(error) {
                 console.log(error)
             }
             // we add the dependencies to the array as we need to be in sync with the state
             // we add the router to the array as we need to be in sync with the state
-        }, [email, password])
+        }, [email, password, router])
 
     // REGISTER FUNCTION - CONNECT TO THE API
     const register = useCallback(async () => {

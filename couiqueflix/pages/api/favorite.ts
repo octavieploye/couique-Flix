@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             // FIND THE MOVIE IN THE DATABASE
             const existingMovie = await prismadb.movie.findUnique({
                 where: {
-                    id: movieId
+                    id: movieId,
                 }
             })
             // IF THE MOVIE DOESN'T EXIST, THROW AN ERROR
@@ -41,7 +41,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             // RETURN THE UPDATED USER
             return res.status(200).json(user)
         }
-        // HANDLER FOR DELETE REQUESTS
+        //* HANDLER DELETE REQUEST
         if(req.method === "DELETE") {
             // Check if the user is authenticated
             const { currentUser } = await serverAuth(req,res) ;
@@ -58,7 +58,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 throw new Error('Movie not found')
             }
             // FILTER THE FAVORITEIDS ARRAY TO REMOVE THE MOVIE ID
-            // const updatedFavoriteIds = without(currentUser.favoriteIds, movieId)
+            const updatedFavoriteIds = without(currentUser.favoriteIds, movieId)
 
             // UPDATE THE USER'S FAVORITES
             const updatedUser = await prismadb.user.update({
@@ -67,10 +67,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 },
                 // REMOVE THE MOVIE FROM THE USER'S FAVORITES(FAVORITEIDS -SEE PRISMA SCHEMA-)
                 data: {
-                    favoriteIds: {
-                        // FILTER THE FAVORITEIDS ARRAY TO REMOVE THE MOVIE ID
-                        set: without(currentUser.favoriteIds, movieId)
-                    }
+                    // SET THE FAVORITEIDS TO THE UPDATED FAVORITEIDS ARRAY
+                    favoriteIds: updatedFavoriteIds
                 }
             })
             // RETURN THE UPDATED USER

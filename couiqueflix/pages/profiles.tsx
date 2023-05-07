@@ -4,6 +4,8 @@ import Image from 'next/image'
 import useCurrentUser from '@/hooks/useCurrentUser'
 import { useRouter } from 'next/router'
 
+// TODO ADD THE DIFFERENT IMAGES PROFILE AND CREATE A USERCARD FUNCTION
+
 export async function getServerSideProps(context: NextPageContext) {
     // Get the user's session based on the request
     const session = await getSession(context)

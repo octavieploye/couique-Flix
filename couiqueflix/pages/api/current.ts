@@ -1,3 +1,4 @@
+// *HANDLE THE " GET " /api/current  REQUEST FOR CURRENTUSER*
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import serverAuth from '@/database/serverAuth';
