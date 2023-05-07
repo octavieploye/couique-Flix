@@ -47,45 +47,45 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
         console.log( 'Request method from handler function 3',req.method);
         //* HANDLER DELETE REQUEST
-        if(req.method === "DELETE") {
+        // if(req.method === "DELETE") {
             
-            // Check if the user is authenticated
-            const { currentUser } = await serverAuth(req, res) ;
+        //     // Check if the user is authenticated
+        //     const { currentUser } = await serverAuth(req, res) ;
             
-            // Get the movieId from the request body
-            const { movieId } = req.body
+        //     // Get the movieId from the request body
+        //     const { movieId } = req.body
             
-            // FIND THE MOVIE IN THE DATABASE
-            const existingMovie = await prismadb.movie.findUnique({
-                where: {
-                    id: movieId
-                }
-            })
-            console.log(`existingMovie to be removed: ${existingMovie}`);
-            // IF THE MOVIE DOESN'T EXIST, THROW AN ERROR
-            if(!existingMovie) {
-                throw new Error('Movie not found')
-            }
-            // FILTER THE FAVORITEIDS ARRAY TO REMOVE THE MOVIE ID
-            const updatedFavoriteIds = without(currentUser.favoriteIds, movieId)
+        //     // FIND THE MOVIE IN THE DATABASE
+        //     const existingMovie = await prismadb.movie.findUnique({
+        //         where: {
+        //             id: movieId
+        //         }
+        //     })
+        //     console.log(`existingMovie to be removed: ${existingMovie}`);
+        //     // IF THE MOVIE DOESN'T EXIST, THROW AN ERROR
+        //     if(!existingMovie) {
+        //         throw new Error('Movie not found')
+        //     }
+        //     // FILTER THE FAVORITEIDS ARRAY TO REMOVE THE MOVIE ID
+        //     const updatedFavoriteIds = without(currentUser.favoriteIds, movieId)
 
-            // UPDATE THE USER'S FAVORITES
-            const updatedUser = await prismadb.user.update({
-                where: {
-                    email: currentUser.email || '',
-                },
-                // REMOVE THE MOVIE FROM THE USER'S FAVORITES(FAVORITEIDS -SEE PRISMA SCHEMA-)
-                data: {
-                    // SET THE FAVORITEIDS TO THE UPDATED FAVORITEIDS ARRAY
-                    favoriteIds: updatedFavoriteIds
+        //     // UPDATE THE USER'S FAVORITES
+        //     const updatedUser = await prismadb.user.update({
+        //         where: {
+        //             email: currentUser.email || '',
+        //         },
+        //         // REMOVE THE MOVIE FROM THE USER'S FAVORITES(FAVORITEIDS -SEE PRISMA SCHEMA-)
+        //         data: {
+        //             // SET THE FAVORITEIDS TO THE UPDATED FAVORITEIDS ARRAY
+        //             favoriteIds: updatedFavoriteIds
                     
-                }
-            })
-            // RETURN THE UPDATED USER
-            return res.status(200).json(updatedUser)
-        }
-        // IF THE REQUEST IS NEITHER A POST OR DELETE REQUEST, THROW AN ERROR
-        return res.status(405).end()
+        //         }
+        //     })
+        //     // RETURN THE UPDATED USER
+        //     return res.status(200).json(updatedUser)
+        // }
+        // // IF THE REQUEST IS NEITHER A POST OR DELETE REQUEST, THROW AN ERROR
+        // return res.status(405).end()
         // ERROR HANDLING
     } catch (error) {
         console.log(error);
