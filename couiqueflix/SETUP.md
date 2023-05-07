@@ -41,7 +41,11 @@ User CONNECT TO THE DB
 - yarn add axios
 - register.ts
 
-CREATE NEXTAUTH FILE, REGISTER FILE -> ADD REGISTER AND LOGIN FUNCTION, REDIRECT TO HOME IF SUCCESSFULL
+
+*****CREATE NEXTAUTH FILE, REGISTER FILE -> ADD REGISTER AND LOGIN FUNCTION, REDIRECT TO HOME IF SUCCESSFULL***
+********************************
+  - AuthOptions to be imported from [...next_auth] then create a const authOptions: AuthOptions {// ...YOUR CODE}
+********************************
 
 SIGNIN WITH GOOGLE, FACEBOOK...ETC
 - yarn add react-icons

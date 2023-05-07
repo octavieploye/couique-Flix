@@ -11,11 +11,10 @@ if(req.method !== 'GET') {
     // If not, return a 405 status code
         return res.status(405).end()
     }
-console.log('im a favorite error before the try');
+
     try {
         // Check if the user is authenticated
         const { currentUser } = await serverAuth(req,res) ;
-        console.log('im a favorite error after the serverAuth');
       
         // Get the user's favorite movies
         const favoriteMovies = await prismadb.movie.findMany({
@@ -26,13 +25,11 @@ console.log('im a favorite error before the try');
                 }
             }
         })
-        console.log('im a favorite error before the return');
         // Return the favorite movies
         return res.status(200).json(favoriteMovies)
         // Catch any errors and return a 400 status code
     } catch (error) {
         console.log(error);
-        console.log('Im a favorite return error');
         return res.status(400).end()
         
     }
