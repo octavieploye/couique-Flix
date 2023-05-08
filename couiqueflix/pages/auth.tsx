@@ -1,5 +1,5 @@
 
-import Input from "../components/Input"
+import Input from "@/components/input"
 import Image from "next/image"
 import { useState, useCallback } from "react"
 
