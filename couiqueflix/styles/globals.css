@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+@apply bg-zinc-900 h-full overflow-x-hidden
+
+}
+
+/* We add here 2 UNDESCORES BEFORE THE NEXT  */
+#__next {
+@apply h-full
+
+}
+
+html {
+@apply h-full
+
+}
+
+
+  
