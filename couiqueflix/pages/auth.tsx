@@ -133,7 +133,7 @@ const Auth = () => {
                             <button 
                             // WE USE THE VARIANT STATE TO TOGGLE THE LOGIN OR REGISTER LOGIC
                             onClick={variant === 'login' ? login : register}
-                            className="bg-red-600 py-3  text-white rounded-md w-full mt-10 hover-bg-red-700 transition ">
+                            className="bg-red-600 py-3  text-white rounded-md w-full mt-10 hover:bg-red-800 transition ">
                                 {/* TOGGLE BUTTON LOGIN OR REGISTER LOGIC */}
                                 {variant === 'login' ? 'Login' : 'Sign Up'}
                             </button>
